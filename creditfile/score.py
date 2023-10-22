@@ -1,13 +1,16 @@
 # Created 2023-10-18
 
 
+from importlib_resources import files, as_file
 import joblib
 import lightgbm as lgb
 
 
 # Artifacts
-classifier = lgb.Booster(model_file='artifacts/model.txt')
-scaler = joblib.load('artifacts/score-scaler.pickle')
+with as_file(__package__).joinpath('artifacts/model.txt') as eml:
+    classifier = lgb.Booster(model_file=eml)
+with as_file(__package__).joinpath('artifacts/score-scaler.pickle') as eml:
+    scaler = joblib.load(eml)
 
 
 # Scorer

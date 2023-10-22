@@ -3,6 +3,7 @@
 
 from .utils import notna, isna, force_numeric, normalize_text
 from .loancalc import Loan
+from importlib_resources import files, as_file
 import joblib
 import numpy as np
 import pandas as pd
@@ -86,7 +87,8 @@ MODEL_FEATURES = (
 
 
 # Artifacts
-bow = joblib.load('artifacts/bow.pickle')
+with as_file(__package__).joinpath('artifacts/bow.pickle') as eml:
+    bow = joblib.load(eml)
 
 
 # Feature processing
