@@ -87,8 +87,8 @@ MODEL_FEATURES = (
 
 
 # Artifacts
-RESOURCE_LOC = files('creditfile.artifacts')
-with as_file(RESOURCE_LOC.joinpath('bow.pickle')) as eml:
+RESOURCE_LOC = files(__package__)
+with as_file(RESOURCE_LOC.joinpath('artifacts/bow.pickle')) as eml:
     bow = joblib.load(eml)
 
 
