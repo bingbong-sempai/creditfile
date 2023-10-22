@@ -4,12 +4,13 @@
 from importlib_resources import files, as_file
 import joblib
 import lightgbm as lgb
+from pathlib import Path
 
 
 # Artifacts
-with as_file(__package__).joinpath('artifacts/model.txt') as eml:
+with as_file(Path(__package__)).joinpath('artifacts/model.txt') as eml:
     classifier = lgb.Booster(model_file=eml)
-with as_file(__package__).joinpath('artifacts/score-scaler.pickle') as eml:
+with as_file(Path(__package__)).joinpath('artifacts/score-scaler.pickle') as eml:
     scaler = joblib.load(eml)
 
 
