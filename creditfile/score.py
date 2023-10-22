@@ -7,9 +7,10 @@ import lightgbm as lgb
 
 
 # Artifacts
-with as_file(__package__).joinpath('artifacts/model.txt') as eml:
+RESOURCE_LOC = files('creditfile.artifacts')
+with as_file(RESOURCE_LOC.joinpath('model.txt')) as eml:
     classifier = lgb.Booster(model_file=eml)
-with as_file(__package__).joinpath('artifacts/score-scaler.pickle') as eml:
+with as_file(RESOURCE_LOC.joinpath('score-scaler.pickle')) as eml:
     scaler = joblib.load(eml)
 
 
