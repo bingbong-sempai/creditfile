@@ -7,7 +7,6 @@ from importlib_resources import files, as_file
 import joblib
 import numpy as np
 import pandas as pd
-from pathlib import Path
 import re
 
 
@@ -88,7 +87,7 @@ MODEL_FEATURES = (
 
 
 # Artifacts
-with as_file(Path(__package__)).joinpath('artifacts/bow.pickle') as eml:
+with as_file(__package__).joinpath('artifacts/bow.pickle') as eml:
     bow = joblib.load(eml)
 
 
