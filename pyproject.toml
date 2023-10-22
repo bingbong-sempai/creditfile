@@ -1,0 +1,6 @@
+# Created 2023-10-06
+[project]
+name = "creditfile"
+version = "0.1"
+description = "Processing Zurich credit files."
+authors = [{name = "Bingbong"}]
