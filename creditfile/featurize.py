@@ -9,8 +9,6 @@ import numpy as np
 import pandas as pd
 import re
 
-import creditfile
-
 
 # Constants
 NULL_VALUE = float('nan')
@@ -89,7 +87,7 @@ MODEL_FEATURES = (
 
 
 # Artifacts
-with as_file(creditfile).joinpath('artifacts/bow.pickle') as eml:
+with as_file(__package__).joinpath('artifacts/bow.pickle') as eml:
     bow = joblib.load(eml)
 
 
