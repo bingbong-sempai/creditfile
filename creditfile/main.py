@@ -69,8 +69,8 @@ def validate_fields(data, essential_fields=ESSENTIAL_FIELDS):
             missing = [
                 field for field in v if isna(subset.get(field, None))
             ]
-            if missing:
-                missing_fields[k] = missing
+        if missing:
+            missing_fields[k] = missing
     return missing_fields
 
 def pretty_print(data, level=0, null_repr='NULL'):
@@ -85,17 +85,22 @@ def pretty_print(data, level=0, null_repr='NULL'):
             print(f'{indentation}{k}', end='')
             pretty_print(v, level+1)
     elif isinstance(data, list):
-        print(f': [{", ".join(data)}]')
+        if len(data):
+            print()
+            for k in data:
+                print(f'{indentation}{k}')
+        else: print(': []')
     else:
         print(f': {data}')
 
 def print_missing(normalized):
     'Print fields missing from the credit file.'
-    print('MISSING DATA')
+    print('MISSING DATA', end='')
     missing_fields = validate_fields(normalized)
     if missing_fields:
         pretty_print(missing_fields, level=1)
     else:
+        print()
         print('    None')
 
 
@@ -107,18 +112,22 @@ def analyze_upload():
     parsed = get_file_details(fn) | parse_credit_report(report)
     normalized = normalize_credit_data(parsed)
     features = prepare_features(normalized)
+    missing_count = sum(1 for _ in features if isna(_) or _ == -1)
     score = make_credit_score(features)
 
     # Printing info
     print()
-    print(f'CREDIT SCORE: {score}')
-    print()
     print_missing(normalized)
+    print()
+    if missing_count < 5:
+        print(f'CREDIT SCORE: {score}')
+    else:
+        print(f'CREDIT SCORE: Too many missing data fields.')
     print()
     print('DATA VALIDATION')
     pretty_print(normalized)
     print()
-    
+
     # Exporting normalized data
     def on_button_click(b):
         normalized['credit_score'] = score

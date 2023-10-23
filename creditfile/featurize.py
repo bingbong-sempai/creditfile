@@ -1,8 +1,9 @@
-# Created 2023-10-16
+# Created 2023-10-23
 
 
 from .utils import notna, isna, force_numeric, normalize_text
 from .loancalc import Loan
+
 from importlib_resources import files, as_file
 import joblib
 import numpy as np
@@ -87,6 +88,7 @@ MODEL_FEATURES = (
 
 
 # Artifacts
+# bow = joblib.load('artifacts/bow.pickle')
 RESOURCE_LOC = files(__package__)
 with as_file(RESOURCE_LOC.joinpath('artifacts/bow.pickle')) as eml:
     bow = joblib.load(eml)
