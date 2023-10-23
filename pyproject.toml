@@ -4,3 +4,6 @@ name = "creditfile"
 version = "0.1"
 description = "Processing Zurich credit files."
 authors = [{name = "Bingbong"}]
+
+[tool.setuptools.package-data]
+"creditfile.artifacts" = ["*.txt", "*.pickle"]
