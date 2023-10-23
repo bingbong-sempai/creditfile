@@ -1,7 +1,7 @@
 # Created 2023-10-06
 [project]
 name = "creditfile"
-version = "0.1"
+version = "0.2"
 description = "Processing Zurich credit files."
 authors = [{name = "Bingbong"}]
 
